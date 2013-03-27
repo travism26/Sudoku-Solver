@@ -8,6 +8,11 @@ import java.util.Vector;
   * UNB Computer Science project "Introduction to Artificial intelligence"
   * 
   *   Quick note: you can ignore some of my comments I use them to help solve the problem at hand.
+  * 
+  * 
+  * 
+  * 				QUICK NOTE!!!!!!
+  * THIS CODE WILL BE REDONE TO MAKE USE OF OOP ALSO MAKE IT EASIER TO READ!!
   */
 
 public class Sudoku { 
