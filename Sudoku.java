@@ -147,15 +147,6 @@ public class Sudoku {
         return numOpenSpots;
     }
 
-    //this is just for testing purposes
-    public void printpuzzle(int[][] puzzle) {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++)
-                System.out.print(puzzle[i][j] + " ");
-            System.out.println();
-        }
-    }
-
     /*
      * This will build a list of possible numbers that can fit into the
      * open cell.
@@ -172,82 +163,17 @@ public class Sudoku {
         }
     }
 
-    public boolean search(int[][] puzzle) {
-        boolean check;
-        int[][] numOpenSpots = getopenspot(puzzle);
-        int k = 0;
-        boolean isFound = false;
 
-        while (!isFound) {
-            int i = numOpenSpots[k][0];
-            int j = numOpenSpots[k][1];
 
-            if (puzzle[i][j] == 0) {
-                puzzle[i][j] = 1;
-            }
 
-            check = isUsed(puzzle, i, j);
-
-            if (check) {
-                puzzle[i][j] = puzzle[i][j] + 1;
-            }
-
-            else if ((isValid(i, j, puzzle))) {
-                if (k + 1 == numOpenSpots.length) {
-                    isFound = true;
-                } else {
-                    k++;
-                }
-            }
-
-            else if (puzzle[i][j] < 9) {
-                puzzle[i][j] = puzzle[i][j] + 1;
-            }
-
-            else {
-                while (puzzle[i][j] == 9) {
-                    puzzle[i][j] = 0;
-                    if (k == 0) {
-                        return false;
-                    }
-                    k--;
-                    i = numOpenSpots[k][0];
-                    j = numOpenSpots[k][1];
-                }
-                puzzle[i][j] = puzzle[i][j] + 1;
-            }
-        }
-        return true;
-    }
 
     /* Check whether the current number on the
      *  puzzle[i][j] is valid in the rules of Sudoku
      */
 
     public boolean isValid(int i, int j, int[][] puzzle) {
-        // Check whether puzzle[i][j] is valid at the i's row
-        for (int c = 0; c < 9; c++) {
-            if (c != j && puzzle[i][c] == puzzle[i][j]) {
-                numberOfSearchs++;
-                return false;
-            }
-        }
-        // Check whether puzzle[i][j] is valid at the j's column
-        for (int r = 0; r < 9; r++) {
-            if (r != i && puzzle[r][j] == puzzle[i][j]) {
-                numberOfSearchs++;
-                return false;
-            }
-        }
-        // Check whether puzzle[i][j] is valid in the 3 by 3 box
-        for (int r = (i / 3) * 3; r < (i / 3) * 3 + 3; r++) {
-            for (int col = (j / 3) * 3; col < (j / 3) * 3 + 3; col++) {
-                if (r != i && col != j && puzzle[r][col] == puzzle[i][j]) {
-                    numberOfSearchs++;
-                    return false;
-                }
-            }
-        }
+
+        if(rowCheck(i, j, puzzle) && columnCheck(i, j, puzzle) && boxCheck(i, j, puzzle))
         return true; // The current value at puzzle[i][j] is valid
     }
 
