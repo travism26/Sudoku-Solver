@@ -164,86 +164,11 @@ public class Sudoku {
     }
 
 
-
-
-
-    /* Check whether the current number on the
-     *  puzzle[i][j] is valid in the rules of Sudoku
-     */
-
-    public boolean isValid(int i, int j, int[][] puzzle) {
-
-        if(rowCheck(i, j, puzzle) && columnCheck(i, j, puzzle) && boxCheck(i, j, puzzle))
-        return true; // The current value at puzzle[i][j] is valid
-    }
-
-    public boolean rowCheck(int i, int j, int[][] puzzle) {
-        for (int c = 0; c < 9; c++) {
-            if (c != j && puzzle[i][c] == puzzle[i][j]) {
-                numberOfSearchs++;
-                return false;
-            }
-        }
-
-
-        return true;
-    }
-    public boolean columnCheck(int i, int j, int[][] puzzle) {
-        for (int r = 0; r < 9; r++) {
-            if (r != i && puzzle[r][j] == puzzle[i][j]) {
-                numberOfSearchs++;
-                return false;
-            }
-        }
-
-        return true;
-    }
-    public boolean boxCheck(int i, int j, int [][]puzzle) {
-        for (int r = (i / 3) * 3; r < (i / 3) * 3 + 3; r++) {
-            for (int col = (j / 3) * 3; col < (j / 3) * 3 + 3; col++) {
-                if (r != i && col != j && puzzle[r][col] == puzzle[i][j]) {
-                    numberOfSearchs++;
-                    return false;
-                }
-            }
-        }
-
-        return true;
-    }
-
-
     public int[][] getopenspot() {
 
         return numOpenSpots;
     }
-    /**
-     *
-     * @param puzzle
-     * @return boolean
-     * This method is designed just to see if the puzzle is valid
-     * as it stands
-     */
-    public boolean isValid(int[][] puzzle) {
-        for (int i = 0; i < 9; i++)
-            for (int j = 0; j < 9; j++)
-                if (puzzle[i][j] != 0 && !isValid(i, j, puzzle)) return false;
 
-
-        return true;
-    }
-
-    public void Clear() {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-
-            }
-        }
-    }
-    public void printError() {
-        System.out.println(error);
-        System.out.println(error2);
-        System.out.println(error3);
-    }
     public int[][] remove(int [][] b, int rowNum) {
         int randomnumber = randomWithRange(5, 8);
         int randomPos = 0;
@@ -309,23 +234,8 @@ public class Sudoku {
         }
         return array;
     }
-    public void check(int[][] puzzle) {
-        if (!isValid(puzzle)) {
-            System.out.println("Invalid input");
-            System.out.println("List of possible errors in you input");
-            printError();
-            System.out.println();
-        } else if (search(puzzle)) {
-            System.out.println("The solution is found:");
-            printpuzzle(puzzle);
-            System.out.print("The number of searchs done is: ");
-            System.out.print(numberOfSearchs);
-            System.out.println();
-        } else {
-            System.out.println("No solution");
-        }
-    }
-    int randomWithRange(int min, int max) {
+
+    public int randomWithRange(int min, int max) {
         int range = (max - min) + 1;
         return (int)(Math.random() * range) + min;
     }
@@ -339,46 +249,7 @@ public class Sudoku {
       * @return
       */
     int counter = 0;
-    public boolean searchAlt(int[][] puzzle) {
-        Vector<Integer> list = new Vector<Integer>();
-        int[][] numOpenSpots = getopenspot(puzzle);
-        int k = 0; // Start from the first free cell
-        boolean found = false; // Solution found?
-
-        while (!found) {
-            int i = numOpenSpots[k][0];
-            int j = numOpenSpots[k][1];
-            if (puzzle[i][j] == 0) {
-                if (list.size() != 0) {
-                    puzzle[i][j] = list.firstElement();
-                }
-
-            }
-            if (isValid(i, j, puzzle)) {
-                if (k + 1 == numOpenSpots.length) { // No more free cells
-                    found = true; // A solution is found
-                } else { // Move to the next free cell
-                    k++;
-                    counter = 0;
-                }
-            } else if ((puzzle[i][j] < 9) && list.size() != 0) {
-                if (list.size() != 0) {
-                    puzzle[i][j] = list.firstElement(); // Check the next possible value in the vector
-                }
-
-            }
-            /**
-             * This is where I create a condition for the backtracking but how???
-             */
-            if (list.size() == 0) {
-
-            }
-
-        }
-
-        return true; // A solution is found
-    }
-
+    
     public static void main(String[] args) throws IOException {
 
         Scanner in = new Scanner(System.in);
