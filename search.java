@@ -9,9 +9,8 @@ public class search {
     }
 
 
-    public boolean search(int[][] puzzle) {
+    public boolean search(int[][] puzzle, int[][] numOpenSpots) {
         boolean check;
-        int[][] numOpenSpots = getopenspot(puzzle);
         int k = 0;
         boolean isFound = false;
 
@@ -23,12 +22,7 @@ public class search {
                 puzzle[i][j] = 1;
             }
 
-            check = isUsed(puzzle, i, j);
-
-            if (check) {
-                puzzle[i][j] = puzzle[i][j] + 1;
-            }
-
+            //found solution
             else if ((isValid(i, j, puzzle))) {
                 if (k + 1 == numOpenSpots.length) {
                     isFound = true;
@@ -66,12 +60,7 @@ public class search {
         while (!found) {
             int i = numOpenSpots[k][0];
             int j = numOpenSpots[k][1];
-            if (puzzle[i][j] == 0) {
-                if (list.size() != 0) {
-                    puzzle[i][j] = list.firstElement();
-                }
 
-            }
             if (isValid(i, j, puzzle)) {
                 if (k + 1 == numOpenSpots.length) { // No more free cells
                     found = true; // A solution is found
@@ -104,7 +93,6 @@ public class search {
     }
 
       public boolean isValid(int i, int j, int[][] puzzle) {
-
         if(rowCheck(i, j, puzzle) && columnCheck(i, j, puzzle) && boxCheck(i, j, puzzle))
         return true; // The current value at puzzle[i][j] is valid
     }

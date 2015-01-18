@@ -110,31 +110,16 @@ public class Sudoku {
         return puzzle;
     }
 
-    /*
-     * the way I decided to solve the sudoku puzzle was to first
-     * search for all the unfilled spots of the puzzle then assign
-     * another array with the location of the open spots.
-     */
     public int[][] getopenspot(int[][] puzzle) {
 
         int totalNumOpen = 0;
-        /*
-         * This will check every cell in the puzzle and check if
-         * the cell contains 0, if it does it will increase the counter
-         * "totalNumOpen" this will determine how big of array size
-         * is needed to hold the number of free cells.
-         */
+        
         for (int i = 0; i < 9; i++)
             for (int j = 0; j < 9; j++)
                 if (puzzle[i][j] == 0)
                     totalNumOpen++;
 
-        /*
-         * This will create a 2D array holding the
-         * Positions of each open "Cell"(cell meaning the position in the puzzle) in the puzzle
-         * and from here it will use them to solve the
-         * puzzle using a search with an heuristic.
-         */
+
         numOpenSpots = new int[totalNumOpen][2];
         int count = 0;
         for (int i = 0; i < 9; i++)
@@ -145,22 +130,6 @@ public class Sudoku {
                 }
 
         return numOpenSpots;
-    }
-
-    /*
-     * This will build a list of possible numbers that can fit into the
-     * open cell.
-     *
-     * the return value will be an vector that holds the only possible numbers
-     * that can fit into the row and column provided.
-     */
-
-    public boolean isUsed(int[][] input, int i, int j) {
-        if (list.contains(input[i][j])) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
 
