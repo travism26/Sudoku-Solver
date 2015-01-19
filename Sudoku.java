@@ -219,6 +219,56 @@ public class Sudoku {
       */
     int counter = 0;
     
+    public boolean isValid(int[][] puzzle) {
+        for (int i = 0; i < 9; i++)
+            for (int j = 0; j < 9; j++)
+                if (puzzle[i][j] != 0 && !isValid(i, j, puzzle)) return false;
+        return true;
+    }
+
+      public boolean isValid(int i, int j, int[][] puzzle) {
+        if(rowCheck(i, j, puzzle) && columnCheck(i, j, puzzle) && boxCheck(i, j, puzzle))
+        return true; // The current value at puzzle[i][j] is valid
+    }
+
+   /*
+    * sudoku rules the row, column, and box rules.
+    */
+
+    public boolean rowCheck(int i, int j, int[][] puzzle) {
+        for (int c = 0; c < 9; c++) {
+            if (c != j && puzzle[i][c] == puzzle[i][j]) {
+                numberOfSearchs++;
+                return false;
+            }
+        }
+
+
+        return true;
+    }
+    public boolean columnCheck(int i, int j, int[][] puzzle) {
+        for (int r = 0; r < 9; r++) {
+            if (r != i && puzzle[r][j] == puzzle[i][j]) {
+                numberOfSearchs++;
+                return false;
+            }
+        }
+
+        return true;
+    }
+    public boolean boxCheck(int i, int j, int [][]puzzle) {
+        for (int r = (i / 3) * 3; r < (i / 3) * 3 + 3; r++) {
+            for (int col = (j / 3) * 3; col < (j / 3) * 3 + 3; col++) {
+                if (r != i && col != j && puzzle[r][col] == puzzle[i][j]) {
+                    numberOfSearchs++;
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) throws IOException {
 
         Scanner in = new Scanner(System.in);
