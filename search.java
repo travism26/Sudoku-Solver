@@ -1,4 +1,4 @@
-public class search {
+public class search implements ISearch {
 
     public void printPuzzle(int[][] puzzle) {
         for (int i = 0; i < 9; i++) {
@@ -8,8 +8,9 @@ public class search {
         }
     }
 
-
-    public boolean search(int[][] puzzle, int[][] numOpenSpots) {
+    // pass an object in.
+    public boolean search(Sudoku puzzle) {
+        int[][] numOpenSpots;
         boolean check;
         int k = 0;
         boolean isFound = false;
@@ -49,40 +50,6 @@ public class search {
             }
         }
         return true;
-    }
-
-    public boolean searchAlt(int[][] puzzle) {
-        Vector<Integer> list = new Vector<Integer>();
-        int[][] numOpenSpots = getopenspot(puzzle);
-        int k = 0; // Start from the first free cell
-        boolean found = false; // Solution found?
-
-        while (!found) {
-            int i = numOpenSpots[k][0];
-            int j = numOpenSpots[k][1];
-
-            if (isValid(i, j, puzzle)) {
-                if (k + 1 == numOpenSpots.length) { // No more free cells
-                    found = true; // A solution is found
-                } else { // Move to the next free cell
-                    k++;
-                    counter = 0;
-                }
-            } else if ((puzzle[i][j] < 9) && list.size() != 0) {
-                if (list.size() != 0) {
-                    puzzle[i][j] = list.firstElement(); // Check the next possible value in the vector
-                }
-            }
-            /**
-             * This is where I create a condition for the backtracking but how???
-             */
-            if (list.size() == 0) {
-
-            }
-
-        }
-
-        return true; // A solution is found
     }
 
     public static void main(String[] args) {
