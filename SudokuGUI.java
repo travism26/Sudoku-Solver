@@ -11,15 +11,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 public class SudokuGUI extends JFrame implements ActionListener  {
-    int[][] puzzle = new int[9][9];
-    private JPanel controls = new JPanel();
-    private JPanel write = new JPanel();
-    JTextArea canvas = new JTextArea();
-    JFileChooser fc = new JFileChooser();
-    private JButton solve = new JButton("Solve");
-    private JButton clear = new JButton("Clear");
-    private JButton Gen = new JButton("Generate");
-    private JButton read = new JButton("Read");
+    	int[][] puzzle = new int[9][9];
+    	private JPanel controls = new JPanel();
+    	private JPanel write = new JPanel();
+    	JTextArea canvas = new JTextArea();
+    	JFileChooser fc = new JFileChooser();
+    	private JButton solve = new JButton("Solve");
+    	private JButton clear = new JButton("Clear");
+    	private JButton Gen = new JButton("Generate");
+    	private JButton read = new JButton("Read");
  	private JButton load = new JButton("Load");
  	private JButton rules = new JButton("Rules");
  	JScrollPane sp = new JScrollPane(write);
@@ -31,66 +31,64 @@ public class SudokuGUI extends JFrame implements ActionListener  {
  	String Error = "NA";
 
  	
-    public SudokuGUI() {
+    	public SudokuGUI() {
     	
-        getContentPane().setLayout(new BorderLayout());
-        solve.addActionListener(this);
-        clear.addActionListener(this);
-        Gen.addActionListener(this);
-        read.addActionListener(this);
-        load.addActionListener(this);
-        rules.addActionListener(this);
-        controls.add(solve);
-        controls.add(clear);
-        controls.add(Gen);
-        controls.add(read);
-        controls.add(load);
-        controls.add(rules);
+        	getContentPane().setLayout(new BorderLayout());
+        	solve.addActionListener(this);
+        	clear.addActionListener(this);
+        	Gen.addActionListener(this);
+        	read.addActionListener(this);
+        	load.addActionListener(this);
+        	rules.addActionListener(this);
+        	controls.add(solve);
+        	controls.add(clear);
+        	controls.add(Gen);
+        	controls.add(read);
+        	controls.add(load);
+        	controls.add(rules);
 
-        JScrollPane scrollPane = new JScrollPane(canvas);
+        	JScrollPane scrollPane = new JScrollPane(canvas);
 
-        setPreferredSize(new Dimension(6000, 6000));
+        	setPreferredSize(new Dimension(6000, 6000));
 
-        add(scrollPane, BorderLayout.CENTER);    
-        canvas.setBorder(BorderFactory.createTitledBorder("Puzzle Input Field"));
-        canvas.setPreferredSize(new Dimension (250, 250)); 
-       // write.add(canvas);
-       // getContentPane().add("North", write);
-        getContentPane().add("South", controls);
+        	add(scrollPane, BorderLayout.CENTER);    
+        	canvas.setBorder(BorderFactory.createTitledBorder("Puzzle Input Field"));
+        	canvas.setPreferredSize(new Dimension (250, 250)); 
+       		// write.add(canvas);
+       		// getContentPane().add("North", write);
+        	getContentPane().add("South", controls);
         
-        getContentPane().setSize(400, 400);
-    } // init()
+        	getContentPane().setSize(400, 400);
+  	} // init()
 		
-    public void actionPerformed(ActionEvent e) {
-    	Sudoku obj = new Sudoku();
+    	public void actionPerformed(ActionEvent e) {
+    		Sudoku obj = new Sudoku();
         
     	
-    	/*
-    	 * This is the read button actions!
-    	 */
-    	if (e.getSource() == read) {
+    		/*
+    	 	* This is the read button actions!
+    	 	*/
+    		if (e.getSource() == read) {
         		if(justRead == true){
         			Object[] options = { "OK"};
-                	JOptionPane.showOptionDialog(null, "you just read in a puzzle press the clear button to reset " +
+                		JOptionPane.showOptionDialog(null, "you just read in a puzzle press the clear button to reset " +
                 										"the puzzle solver or hit solve to solve it", "Warning",
 
-                	        JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+               			JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
 
                 	        null, options, options[0]);
-        		}
-        		else if(justGen ==true){
+        		} else if(justGen == true) {
         			justRead = true;
         			canvas.append("\nYour puzzle has been read in...");
-        		}
-        		else{
+        		} else {
         			String input = canvas.getText();
         			justRead = true;           
         			puzzle = obj.readPuz(input);
         			canvas.append("\n");
         			print();
         		}
-        	
-        } 
+    		}
+ 	} 
         /*
          * Generate button actions
          */
