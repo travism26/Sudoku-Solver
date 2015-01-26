@@ -21,27 +21,19 @@ public class search implements ISearch {
 
             if (puzzle[i][j] == 0) {
                 puzzle[i][j] = 1;
-            }
-
-            //found solution
-            else if ((isValid(i, j, puzzle))) {
+            } else if ((isValid(i, j, puzzle))) {
                 if (k + 1 == numOpenSpots.length) {
                     isFound = true;
                 } else {
                     k++;
                 }
-            }
-
-            else if (puzzle[i][j] < 9) {
+            } else if (puzzle[i][j] < 9) {
                 puzzle[i][j] = puzzle[i][j] + 1;
-            }
-
-            else {
+            } else {
                 while (puzzle[i][j] == 9) {
                     puzzle[i][j] = 0;
-                    if (k == 0) {
+                    if (k == 0)
                         return false;
-                    }
                     k--;
                     i = numOpenSpots[k][0];
                     j = numOpenSpots[k][1];
