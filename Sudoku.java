@@ -35,15 +35,10 @@ public class Sudoku {
                 for (int j = 0; j < 9; j++) {
                     count = 0;
                     for (int i = 0; i < line.length(); i++) {
-                        if (i == 9) {
+                        if (i == 9 || line.length() <= count)
                             break;
-                        }
-                        if (line.length() <= count) {
-                            break;
-                        }
-                        if (line.charAt(count) == 32) {
+                        if (line.charAt(count) == 32)
                             count++;
-                        }
                         puzzle[j][i] = line.charAt(count) - '0';
                         count++;
                     }
