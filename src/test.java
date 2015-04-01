@@ -1,45 +1,58 @@
 public class test {
 
-	public boolean rules(int[] pos, int[][] puzzle) {
+	public boolean rules(int[] pos, int[][] puzzle)
+	{
 		boolean row = rowCheck(pos, puzzle);
 		boolean col = columnCheck(pos, puzzle);
 		boolean box = boxCheck(pos, puzzle);
 
-		if (row && col && box) {
+		if (row && col && box)
+		{
 			return true;
-		} else {
+		} else
+		{
 			return false;
 		}
 	}
 
-	private boolean rowCheck(int[] pos, int[][] puzzle) {
+	private boolean rowCheck(int[] pos, int[][] puzzle)
+	{
 		int i = pos[0];
 		int j = pos[1];
-		for (int c = 0; c < 9; c++) {
-			if (c != j && puzzle[i][c] == puzzle[i][j]) {
+		for (int c = 0; c < 9; c++)
+		{
+			if (c != j && puzzle[i][c] == puzzle[i][j])
+			{
 				return false;
 			}
 		}
 		return true;
 	}
 
-	private boolean columnCheck(int[] pos, int[][] puzzle) {
+	private boolean columnCheck(int[] pos, int[][] puzzle)
+	{
 		int i = pos[0];
 		int j = pos[1];
-		for (int r = 0; r < 9; r++) {
-			if (r != i && puzzle[r][j] == puzzle[i][j]) {
+		for (int r = 0; r < 9; r++)
+		{
+			if (r != i && puzzle[r][j] == puzzle[i][j])
+			{
 				return false;
 			}
 		}
 		return true;
 	}
 
-	private boolean boxCheck(int[] pos, int[][] puzzle) {
+	private boolean boxCheck(int[] pos, int[][] puzzle)
+	{
 		int i = pos[0];
 		int j = pos[1];
-		for (int r = (i / 3) * 3; r < (i / 3) * 3 + 3; r++) {
-			for (int col = (j / 3) * 3; col < (j / 3) * 3 + 3; col++) {
-				if (r != i && col != j && puzzle[r][col] == puzzle[i][j]) {
+		for (int r = (i / 3) * 3; r < (i / 3) * 3 + 3; r++)
+		{
+			for (int col = (j / 3) * 3; col < (j / 3) * 3 + 3; col++)
+			{
+				if (r != i && col != j && puzzle[r][col] == puzzle[i][j])
+				{
 					return false;
 				}
 			}
@@ -48,11 +61,13 @@ public class test {
 	}
 
 	// shorten up the println statement.
-	public static void println(Object input) {
+	public static void println(Object input)
+	{
 		System.out.println(input.toString());
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{
 		test obj = new test();
 		int[][] puzzle = { { 0, 2, 8, 0, 9, 0, 6, 4, 0 },
 				{ 1, 0, 0, 0, 2, 6, 3, 5, 0 }, { 7, 0, 0, 0, 0, 0, 0, 0, 0 },
