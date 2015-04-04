@@ -116,10 +116,8 @@ public class Sudoku {
 					num = (int) (Math.random() * 10);
 				}
 				array[x][y] = num;
-
 			}
 			counter++;
-
 		}
 		return array;
 	}
@@ -130,19 +128,19 @@ public class Sudoku {
 		return (int) (Math.random() * range) + min;
 	}
 
-	//validates the puzzle to ensure it follows the rules.
+	// validates the puzzle to ensure it follows the rules.
 	public boolean isValid(int[][] puzzle)
 	{
 		for (int i = 0; i < 9; i++)
 			for (int j = 0; j < 9; j++)
-				if (puzzle[i][j] != 0 && !rules(i,j, puzzle))
+				if (puzzle[i][j] != 0 && !rules(i, j, puzzle))
 					return false;
 		return true;
 	}
 
-	public boolean rules(int i, int j , int[][] puzzle)
+	public boolean rules(int i, int j, int[][] puzzle)
 	{
-		int[] pos = {i,j};
+		int[] pos = { i, j };
 		boolean row = rowCheck(pos, puzzle);
 		boolean col = columnCheck(pos, puzzle);
 		boolean box = boxCheck(pos, puzzle);
