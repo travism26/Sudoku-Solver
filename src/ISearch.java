@@ -1,3 +1,3 @@
 public interface ISearch {
-	int[][] search(Sudoku Obj);
+	int[][] backtrack(int[][] puzzle, int[][] empty);
 }

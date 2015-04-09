@@ -1,4 +1,5 @@
 import java.io.*;
+import java.lang.reflect.Constructor;
 import java.math.*;
 import java.util.Collections;
 import java.util.Scanner;
@@ -14,11 +15,11 @@ import java.util.Scanner;
 
 public class Sudoku {
 
-	protected int[][] puzzle;
-
-	public Sudoku(int[][] puzzle)
+	protected search solver;
+	
+	public Sudoku(search solver)
 	{
-		this.puzzle = puzzle;
+		this.solver = solver;
 	}
 
 	public int[][] getopenspot(int[][] puzzle)

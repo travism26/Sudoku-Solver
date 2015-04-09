@@ -8,9 +8,8 @@ public class search implements ISearch {
         }
     }
 
-    // pass an object in.
-    public boolean search(Sudoku puzzle) {
-        int[][] numOpenSpots;
+    public int[][] backtrack(int[][] puzzle, int[][] emptySpot) {
+        int[][] numOpenSpots = emptySpot;
         boolean check;
         int k = 0;
         boolean isFound = false;
@@ -24,7 +23,7 @@ public class search implements ISearch {
             }
 
             //found solution
-            else if ((isValid(i, j, puzzle))) {
+            else if ((rules(i, j, puzzle))) {
                 if (k + 1 == numOpenSpots.length) {
                     isFound = true;
                 } else {
@@ -40,7 +39,8 @@ public class search implements ISearch {
                 while (puzzle[i][j] == 9) {
                     puzzle[i][j] = 0;
                     if (k == 0) {
-                        return false;
+                        //PUZZLE CANT BE SOLVED!
+                    	return puzzle;
                     }
                     k--;
                     i = numOpenSpots[k][0];
@@ -49,8 +49,70 @@ public class search implements ISearch {
                 puzzle[i][j] = puzzle[i][j] + 1;
             }
         }
-        return true;
+        return puzzle;
     }
+    
+    public boolean rules(int i, int j, int[][] puzzle)
+	{
+    	int[] pos = {i,j};
+		boolean row = rowCheck(pos, puzzle);
+		boolean col = columnCheck(pos, puzzle);
+		boolean box = boxCheck(pos, puzzle);
+
+		if (row && col && box)
+		{
+			return true;
+		} else
+		{
+			return false;
+		}
+	}
+
+	private boolean rowCheck(int[] pos, int[][] puzzle)
+	{
+		int i = pos[0];
+		int j = pos[1];
+		for (int c = 0; c < 9; c++)
+		{
+			if (c != j && puzzle[i][c] == puzzle[i][j])
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private boolean columnCheck(int[] pos, int[][] puzzle)
+	{
+		int i = pos[0];
+		int j = pos[1];
+		for (int r = 0; r < 9; r++)
+		{
+			if (r != i && puzzle[r][j] == puzzle[i][j])
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private boolean boxCheck(int[] pos, int[][] puzzle)
+	{
+		int i = pos[0];
+		int j = pos[1];
+		for (int r = (i / 3) * 3; r < (i / 3) * 3 + 3; r++)
+		{
+			for (int col = (j / 3) * 3; col < (j / 3) * 3 + 3; col++)
+			{
+				if (r != i && col != j && puzzle[r][col] == puzzle[i][j])
+				{
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
 
     public static void main(String[] args) {
 
