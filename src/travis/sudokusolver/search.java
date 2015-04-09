@@ -1,3 +1,4 @@
+package travis.sudokusolver;
 public class search implements ISearch {
 
     public void printPuzzle(int[][] puzzle) {

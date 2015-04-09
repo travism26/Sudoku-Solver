@@ -1,3 +1,4 @@
+package travis.sudokusolver;
 public class test {
 
 	public boolean rules(int[] pos, int[][] puzzle)

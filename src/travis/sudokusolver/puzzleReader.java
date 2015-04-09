@@ -1,3 +1,4 @@
+package travis.sudokusolver;
 public class puzzleReader() {
 
     public int[][] readPuz(String input) {

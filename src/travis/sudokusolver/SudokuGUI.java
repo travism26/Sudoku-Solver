@@ -1,3 +1,4 @@
+package travis.sudokusolver;
 
 /**
   * @author Travis Martin
