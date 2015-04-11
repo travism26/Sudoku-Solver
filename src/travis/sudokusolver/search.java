@@ -68,7 +68,7 @@ public class search implements ISearch {
 		}
 	}
 
-	private boolean rowCheck(int[] pos, int[][] puzzle)
+    public boolean rowCheck(int[] pos, int[][] puzzle)
 	{
 		int i = pos[0];
 		int j = pos[1];
@@ -82,7 +82,7 @@ public class search implements ISearch {
 		return true;
 	}
 
-	private boolean columnCheck(int[] pos, int[][] puzzle)
+	public boolean columnCheck(int[] pos, int[][] puzzle)
 	{
 		int i = pos[0];
 		int j = pos[1];
@@ -96,7 +96,7 @@ public class search implements ISearch {
 		return true;
 	}
 
-	private boolean boxCheck(int[] pos, int[][] puzzle)
+	public boolean boxCheck(int[] pos, int[][] puzzle)
 	{
 		int i = pos[0];
 		int j = pos[1];

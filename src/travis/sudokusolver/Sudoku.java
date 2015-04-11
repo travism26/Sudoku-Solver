@@ -18,6 +18,7 @@ import java.util.Scanner;
 public class Sudoku {
 
 	protected search solver;
+	protected int[][] puzzle;
 
 	// might now be needed.
 	protected int[][] emptyGrids;
@@ -48,6 +49,8 @@ public class Sudoku {
 
 		return numOpenSpots;
 	}
+	
+	
 
 	public static void main(String[] args) throws IOException
 	{

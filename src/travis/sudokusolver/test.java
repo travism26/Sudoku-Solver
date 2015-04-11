@@ -70,12 +70,19 @@ public class test {
 	public static void main(String[] args)
 	{
 		test obj = new test();
-		int[][] puzzle = { { 0, 2, 8, 0, 9, 0, 6, 4, 0 },
-				{ 1, 0, 0, 0, 2, 6, 3, 5, 0 }, { 7, 0, 0, 0, 0, 0, 0, 0, 0 },
-				{ 0, 7, 2, 8, 0, 0, 0, 0, 0 }, { 8, 9, 5, 2, 0, 4, 7, 1, 3 },
-				{ 0, 0, 0, 0, 0, 5, 8, 9, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 4 },
-				{ 0, 8, 1, 4, 5, 0, 0, 0, 9 }, { 0, 3, 4, 0, 8, 0, 5, 7, 0 } };
-		int[] pos = { 0, 0 };
+		int[][] puzzle = 
+			{ 
+				{ 0, 2, 8, 0, 9, 0, 6, 4, 0 },
+				{ 1, 0, 0, 0, 2, 6, 3, 5, 0 },
+				{ 7, 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 7, 2, 8, 0, 0, 0, 0, 0 },
+				{ 8, 9, 5, 2, 0, 4, 7, 1, 3 },
+				{ 0, 0, 0, 0, 0, 5, 8, 9, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0, 4 },
+				{ 0, 8, 1, 4, 5, 0, 0, 0, 9 },
+				{ 0, 3, 4, 0, 8, 0, 5, 7, 0 }
+			};
+		int[][] pos = { { 0, 0 },{0, 3 }, { 0, 5 }, { 0, 8} };
 		boolean testPostion;
 
 		int[][] testCases = { { 0, 1 }, { 1, 4 }, { 8, 8 }, { 0, 0 }, { 5, 0 } };
@@ -83,7 +90,11 @@ public class test {
 		// for(){
 
 		// }
-		testPostion = obj.rules(pos, puzzle);
+		//testPostion = obj.rules(pos, puzzle);
+		for (int i = 0; i < testCases.length; i++)
+		{
+			
+		}
 		println("----- TESTING RULES METHOD -----");
 		println(" " + testPostion);
 
