@@ -11,7 +11,6 @@ public class search implements ISearch {
 
     public int[][] backtrack(int[][] puzzle, int[][] emptySpot) {
         int[][] numOpenSpots = emptySpot;
-        boolean check;
         int k = 0;
         boolean isFound = false;
 

@@ -13,7 +13,8 @@ public class searchTest {
 	 * valid numbers for the first position are: {3, 5}
 	 * Invalid Nums for the fisrt pos are: { 1, 2, 4, 6, 7, 8, 9}
 	 */
-	int[][] puzzle = { 
+	int[][] puzzle = 
+		{ 
 			{ 0, 2, 8, 0, 9, 0, 6, 4, 0 },
 			{ 1, 0, 0, 0, 2, 6, 3, 5, 0 }, 
 			{ 7, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -23,7 +24,7 @@ public class searchTest {
 			{ 0, 0, 0, 0, 0, 0, 0, 0, 4 },
 			{ 0, 8, 1, 4, 5, 0, 0, 0, 9 }, 
 			{ 0, 3, 4, 0, 8, 0, 5, 7, 0 } 
-			};
+		};
 	int[] pos = { 0, 0 };
 
 	@Test
