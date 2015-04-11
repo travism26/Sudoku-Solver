@@ -96,7 +96,7 @@ public class test {
 			
 		}
 		println("----- TESTING RULES METHOD -----");
-		println(" " + testPostion);
+		
 
 	}
 }
