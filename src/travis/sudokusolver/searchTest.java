@@ -20,16 +20,16 @@ public class searchTest {
 	int[][] puzzle = 
 		{ 
 			{ 0, 2, 8, 0, 9, 0, 6, 4, 0 },
-			{ 1, 0, 0, 0, 2, 6, 3, 5, 0 }, 
+			{ 1, 0, 0, 0, 2, 6, 3, 5, 0 },
 			{ 7, 0, 0, 0, 0, 0, 0, 0, 0 },
-			{ 0, 7, 2, 8, 0, 0, 0, 0, 0 }, 
+			{ 0, 7, 2, 8, 0, 0, 0, 0, 0 },
 			{ 8, 9, 5, 2, 0, 4, 7, 1, 3 },
-			{ 0, 0, 0, 0, 0, 5, 8, 9, 0 }, 
+			{ 0, 0, 0, 0, 0, 5, 8, 9, 0 },
 			{ 0, 0, 0, 0, 0, 0, 0, 0, 4 },
-			{ 0, 8, 1, 4, 5, 0, 0, 0, 9 }, 
+			{ 0, 8, 1, 4, 5, 0, 0, 0, 9 },
 			{ 0, 3, 4, 0, 8, 0, 5, 7, 0 }
 		};
-	int[][] pos = { { 0, 0 },{0, 3 }, { 0, 5 }, { 0, 8} };
+	search Search = new search();
 
 //	@Test
 //	public void test()
@@ -38,16 +38,40 @@ public class searchTest {
 //	}
 
 	@Test
-	public void testInvalidRow()
+	public void testValidRow()
 	{
-		search Search = new search();
+		int[][] pos = { { 0, 0 },{0, 3 }, { 0, 5 }, { 0, 8} };
 		int[] testable = {1, 3, 5, 7};
 		for (int i = 0; i < pos.length; i++)
 		{
-			puzzle[0][pos[i][1]] = testable[i];
+			puzzle[pos[i][0]][pos[i][1]] = testable[i];
 			assertEquals("should return true", true, Search.rowCheck(pos[i], puzzle));
 		}
 		
+	}
+	@Test
+	public void testValidCol(){
+		
+		int[][] pos = { { 0, 0 },{3, 0 }, { 5, 0 }, { 6, 0}, {7, 0}, {8, 0} };
+		int[] testable = {2, 3, 4, 5, 6, 9};
+		for (int i = 0; i < pos.length; i++)
+		{
+			puzzle[pos[i][0]][pos[i][1]] = testable[i];
+			assertEquals("should return true", true, Search.columnCheck(pos[i], puzzle));
+		}
+	}
+	
+	@Test
+	public void testValidBox(){
+		
+		//testable spots
+		int[][] pos = { { 0, 0 }, { 1, 1 }, { 1, 2 }, {2, 1 }, { 2, 2 } };
+		int[] testable = {2, 3, 4, 5, 6, 9};
+		for (int i = 0; i < pos.length; i++)
+		{
+			puzzle[pos[i][0]][pos[i][1]] = testable[i];
+			assertEquals("should return true", true, Search.boxCheck(pos[i], puzzle));
+		}
 	}
 
 }
