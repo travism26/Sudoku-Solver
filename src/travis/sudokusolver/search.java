@@ -102,22 +102,33 @@ public class search implements ISearch {
 		int j = pos[1];
 		for (int r = (i / 3) * 3; r < (i / 3) * 3 + 3; r++)
 		{
+			System.out.println();
 			for (int col = (j / 3) * 3; col < (j / 3) * 3 + 3; col++)
 			{
+				System.out.println("R value: " + r);
+				System.out.println("I value: " + i);
+				System.out.println("col value: " + col);
+				System.out.println("J value: " + j);
+				System.out.println("puzzle[r][col] value: " + puzzle[r][col]);
+				System.out.println("puzzle[i][j] value: " + puzzle[i][j]);
+				//R and col are used to remove unneed tests
 				if (r != i && col != j && puzzle[r][col] == puzzle[i][j])
 				{
+					System.out.println("value: FALSE");
 					return false;
 				}
 			}
 		}
+		System.out.println("value: TRUE");
 		return true;
 	}
 
 
     public static void main(String[] args) {
+    	search obj = new search();
     	int[][] puzzle = 
 			{ 
-				{ 0, 2, 8, 0, 9, 0, 6, 4, 0 },
+				{ 1, 2, 8, 0, 9, 0, 6, 4, 0 },
 				{ 1, 0, 0, 0, 2, 6, 3, 5, 0 }, 
 				{ 7, 0, 0, 0, 0, 0, 0, 0, 0 },
 				{ 0, 7, 2, 8, 0, 0, 0, 0, 0 }, 
@@ -127,13 +138,22 @@ public class search implements ISearch {
 				{ 0, 8, 1, 4, 5, 0, 0, 0, 9 }, 
 				{ 0, 3, 4, 0, 8, 0, 5, 7, 0 } 
 			};
-		for (int i = 0; i < 3; i++)
+    	int[][] pos = { {1,0},{ 2, 1 }, { 1, 2 } };
+    	//int[] testable = {9, 7, 2};
+    	for (int i = 0; i < pos.length; i++)
 		{
-			System.out.println();
-			for (int j = 0; j < 8; j++)
-			{
-				System.out.print(puzzle[i][j]);
-			}
+    		//puzzle[pos[i][0]][pos[i][1]] = testable[i];
+    		obj.boxCheck(pos[i], puzzle);
+			System.out.println("---------------------");
 		}
+    	
+//		for (int i = 0; i < 9; i++)
+//		{
+//			System.out.println();
+//			for (int j = 0; j < 9; j++)
+//			{
+//				System.out.print(puzzle[i][j]);
+//			}
+//		}
     }
 }
