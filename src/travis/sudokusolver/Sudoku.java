@@ -1,10 +1,7 @@
 package travis.sudokusolver;
 
 import java.io.*;
-import java.lang.reflect.Constructor;
-import java.math.*;
-import java.util.Collections;
-import java.util.Scanner;
+
 
 /*
  * @author Travis Martin
@@ -28,6 +25,9 @@ public class Sudoku {
 		this.solver = solver;
 	}
 
+	public static void println(Object input){
+		System.out.println(input.toString());
+	}
 	public int[][] getopenspot(int[][] puzzle)
 	{
 		int totalNumOpen = 0;
@@ -68,8 +68,18 @@ public class Sudoku {
 				{ 0, 3, 4, 0, 8, 0, 5, 7, 0 }
 			};
 		int[][] emptyLocals = obj.getopenspot(puzzle);
+		println(emptyLocals.length);
 		for (int i = 0; i < 4; i++)
 		{
+			int row = emptyLocals[i][0];
+			int col = emptyLocals[i][1];
+//			println("ROW: "+ row);
+//			println("COL: "+ col);
+			
+			if(puzzle[row][col] == 0){
+				puzzle[row][col] = 1;
+			}
+			
 			
 		}
 

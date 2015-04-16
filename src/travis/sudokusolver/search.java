@@ -124,7 +124,7 @@ public class search implements ISearch {
 				System.out.println("J value: " + j);
 				System.out.println("puzzle[r][col] value: " + puzzle[r][col]);
 				System.out.println("puzzle[i][j] value: " + puzzle[i][j]);
-				// R and col are used to remove unneed tests
+				// R and col are already tested remove unnecessary tests cases.
 				if (r != i && col != j && puzzle[r][col] == puzzle[i][j])
 				{
 					System.out.println("value: FALSE");
