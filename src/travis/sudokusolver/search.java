@@ -6,9 +6,10 @@ public class search implements ISearch {
 	{
 		for (int i = 0; i < 9; i++)
 		{
+			System.out.print("{");
 			for (int j = 0; j < 9; j++)
-				System.out.print(puzzle[i][j] + " ");
-			System.out.println();
+				System.out.print(puzzle[i][j] + ",");
+			System.out.print("},\n");
 		}
 	}
 
@@ -36,12 +37,12 @@ public class search implements ISearch {
 
 	public int[][] backtrack(int[][] puzzle)
 	{
+		boolean isDone = false;
+		int i = 0;
 		int[][] emptySpots = getOpenSpots(puzzle);
-		int k = 0;
-		boolean isFound = false;
-
-		for (int i = 0; i < emptySpots.length; i++)
+		while(isDone == false)
 		{
+			
 			int row = emptySpots[i][0];
 			int col = emptySpots[i][1];
 
@@ -49,9 +50,40 @@ public class search implements ISearch {
 			{
 				puzzle[row][col] = 1;
 			}
-			
-			if(searchRules(row, col, puzzle)){
-				System.out.println("TRUE we HIT DAT STUFF");
+
+			// rules are pass we need to check if we are at the end or not else
+			// ++
+			else if (searchRules(row, col, puzzle) == true)
+			{
+				if (i + 1 == emptySpots.length)
+				{
+					return puzzle;
+				} else
+				{
+					i++;
+				}
+			}
+			else if (puzzle[row][col] < 9)
+			{
+				puzzle[row][col] += 1;
+			}
+
+			else
+			{
+				// this means the puzzle is 9 and we need to
+				// backtrack to the previous spot thats valid.
+				while (puzzle[row][col] == 9)
+				{
+					puzzle[row][col] = 0;
+					if (i == 0)
+					{
+						return puzzle;
+					}
+					i--;
+					row = emptySpots[i][0];
+					col = emptySpots[i][1];
+				}
+				puzzle[row][col] += 1;
 			}
 		}
 
@@ -60,19 +92,33 @@ public class search implements ISearch {
 
 	/*
 	 * 
-	 * while (!isFound) { int i = numOpenSpots[k][0]; int j =
-	 * numOpenSpots[k][1];
+	 * while (!isFound) { 
+	 * int i = numOpenSpots[k][0]; 
+	 * int j = numOpenSpots[k][1];
 	 * 
 	 * if (puzzle[i][j] == 0) { puzzle[i][j] = 1; }
 	 * 
-	 * // found solution else if ((searchRules(i, j, puzzle))) { if (k + 1 ==
-	 * numOpenSpots.length) { isFound = true; } else { k++; } }
+	 * // found solution 
+	 * else if ((searchRules(i, j, puzzle))) { 
+	 * 
+	 * if (k + 1 ==
+	 * numOpenSpots.length) { 
+	 * isFound = true; } else { k++; } } -------- CCCC
 	 * 
 	 * else if (puzzle[i][j] < 9) { puzzle[i][j] = puzzle[i][j] + 1; }
 	 * 
-	 * else { while (puzzle[i][j] == 9) { puzzle[i][j] = 0; if (k == 0) { //
-	 * PUZZLE CANT BE SOLVED! return puzzle; } k--; i = numOpenSpots[k][0]; j =
-	 * numOpenSpots[k][1]; } puzzle[i][j] = puzzle[i][j] + 1; } }
+	 * else { 
+		 * while (puzzle[i][j] == 9) { 
+		 * puzzle[i][j] = 0; 
+		 * if (k == 0) {
+		 * //PUZZLE CANT BE SOLVED! return puzzle; 
+		 * } 
+		 * k--; 
+		 * i = numOpenSpots[k][0]; 
+		 * j = numOpenSpots[k][1]; } 
+		 * puzzle[i][j] = puzzle[i][j] + 1; 
+	 * }
+	 * }
 	 */
 
 	public boolean searchRules(int i, int j, int[][] puzzle)
@@ -125,42 +171,45 @@ public class search implements ISearch {
 		int j = pos[1];
 		for (int r = (i / 3) * 3; r < (i / 3) * 3 + 3; r++)
 		{
-			System.out.println();
+			// System.out.println();
 			for (int col = (j / 3) * 3; col < (j / 3) * 3 + 3; col++)
 			{
-				System.out.println("R value: " + r);
-				System.out.println("I value: " + i);
-				System.out.println("col value: " + col);
-				System.out.println("J value: " + j);
-				System.out.println("puzzle[r][col] value: " + puzzle[r][col]);
-				System.out.println("puzzle[i][j] value: " + puzzle[i][j]);
+				// System.out.println("R value: " + r);
+				// System.out.println("I value: " + i);
+				// System.out.println("col value: " + col);
+				// System.out.println("J value: " + j);
+				// System.out.println("puzzle[r][col] value: " +
+				// puzzle[r][col]);
+				// System.out.println("puzzle[i][j] value: " + puzzle[i][j]);
 				// R and col are already tested remove unnecessary tests cases.
 				if (r != i && col != j && puzzle[r][col] == puzzle[i][j])
 				{
-					System.out.println("value: FALSE");
+					// System.out.println("value: FALSE");
 					return false;
 				}
 			}
 		}
-		System.out.println("value: TRUE");
+		// System.out.println("value: TRUE");
 		return true;
 	}
 
 	public static void main(String[] args)
 	{
 		search obj = new search();
-		int[][] puzzle = { { 1, 2, 8, 0, 9, 0, 6, 4, 0 },
-				{ 1, 0, 0, 0, 2, 6, 3, 5, 0 }, { 7, 0, 0, 0, 0, 0, 0, 0, 0 },
-				{ 0, 7, 2, 8, 0, 0, 0, 0, 0 }, { 8, 9, 5, 2, 0, 4, 7, 1, 3 },
-				{ 0, 0, 0, 0, 0, 5, 8, 9, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 4 },
-				{ 0, 8, 1, 4, 5, 0, 0, 0, 9 }, { 0, 3, 4, 0, 8, 0, 5, 7, 0 } };
-		int[][] pos = { { 1, 0 }, { 2, 1 }, { 1, 2 } };
-		// int[] testable = {9, 7, 2};
-		for (int i = 0; i < pos.length; i++)
-		{
-			// puzzle[pos[i][0]][pos[i][1]] = testable[i];
-			obj.boxCheck(pos[i], puzzle);
-			System.out.println("---------------------");
-		}
+		int[][] puzzle = 
+			{ 
+				{ 7, 1, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 5, 0, 0, 0, 9, 0, 0 }, 
+				{ 0, 0, 3, 7, 2, 1, 0, 8, 0 },
+				{ 0, 0, 0, 5, 0, 8, 7, 0, 0 }, 
+				{ 0, 5, 7, 4, 6, 0, 2, 0, 0 },
+				{ 9, 0, 1, 0, 7, 2, 4, 0, 0 }, 
+				{ 0, 0, 0, 6, 4, 0, 8, 5, 0 },
+				{ 0, 0, 0, 0, 9, 0, 0, 0, 4 }, 
+				{ 0, 0, 0, 1, 0, 0, 0, 0, 9 } 
+			};
+		puzzle = obj.backtrack(puzzle);
+
+		obj.printPuzzle(puzzle);
 	}
 }
