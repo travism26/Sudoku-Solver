@@ -40,9 +40,9 @@ public class search implements ISearch {
 		boolean isDone = false;
 		int i = 0;
 		int[][] emptySpots = getOpenSpots(puzzle);
-		while(isDone == false)
+		while (isDone == false)
 		{
-			
+
 			int row = emptySpots[i][0];
 			int col = emptySpots[i][1];
 
@@ -51,8 +51,6 @@ public class search implements ISearch {
 				puzzle[row][col] = 1;
 			}
 
-			// rules are pass we need to check if we are at the end or not else
-			// ++
 			else if (searchRules(row, col, puzzle) == true)
 			{
 				if (i + 1 == emptySpots.length)
@@ -62,22 +60,20 @@ public class search implements ISearch {
 				{
 					i++;
 				}
-			}
-			else if (puzzle[row][col] < 9)
+			} else if (puzzle[row][col] < 9)
 			{
 				puzzle[row][col] += 1;
 			}
 
 			else
 			{
-				// this means the puzzle is 9 and we need to
-				// backtrack to the previous spot thats valid.
 				while (puzzle[row][col] == 9)
 				{
 					puzzle[row][col] = 0;
 					if (i == 0)
 					{
-						return puzzle;
+						//puzzle not solvable.
+						return notSolvable();
 					}
 					i--;
 					row = emptySpots[i][0];
@@ -86,41 +82,20 @@ public class search implements ISearch {
 				puzzle[row][col] += 1;
 			}
 		}
-
 		return puzzle;
 	}
 
-	/*
-	 * 
-	 * while (!isFound) { 
-	 * int i = numOpenSpots[k][0]; 
-	 * int j = numOpenSpots[k][1];
-	 * 
-	 * if (puzzle[i][j] == 0) { puzzle[i][j] = 1; }
-	 * 
-	 * // found solution 
-	 * else if ((searchRules(i, j, puzzle))) { 
-	 * 
-	 * if (k + 1 ==
-	 * numOpenSpots.length) { 
-	 * isFound = true; } else { k++; } } -------- CCCC
-	 * 
-	 * else if (puzzle[i][j] < 9) { puzzle[i][j] = puzzle[i][j] + 1; }
-	 * 
-	 * else { 
-		 * while (puzzle[i][j] == 9) { 
-		 * puzzle[i][j] = 0; 
-		 * if (k == 0) {
-		 * //PUZZLE CANT BE SOLVED! return puzzle; 
-		 * } 
-		 * k--; 
-		 * i = numOpenSpots[k][0]; 
-		 * j = numOpenSpots[k][1]; } 
-		 * puzzle[i][j] = puzzle[i][j] + 1; 
-	 * }
-	 * }
-	 */
-
+	public int[][] notSolvable(){
+		int[][] unSolvable = new int[9][9];
+		for (int i = 0; i < unSolvable.length; i++)
+		{
+			for (int j = 0; j < unSolvable.length; j++)
+			{
+				unSolvable[i][j] = 9;
+			}
+		}
+		return unSolvable;
+	}
 	public boolean searchRules(int i, int j, int[][] puzzle)
 	{
 		int[] pos = { i, j };
@@ -196,18 +171,11 @@ public class search implements ISearch {
 	public static void main(String[] args)
 	{
 		search obj = new search();
-		int[][] puzzle = 
-			{ 
-				{ 7, 1, 0, 0, 0, 0, 0, 0, 0 },
-				{ 0, 0, 5, 0, 0, 0, 9, 0, 0 }, 
-				{ 0, 0, 3, 7, 2, 1, 0, 8, 0 },
-				{ 0, 0, 0, 5, 0, 8, 7, 0, 0 }, 
-				{ 0, 5, 7, 4, 6, 0, 2, 0, 0 },
-				{ 9, 0, 1, 0, 7, 2, 4, 0, 0 }, 
-				{ 0, 0, 0, 6, 4, 0, 8, 5, 0 },
-				{ 0, 0, 0, 0, 9, 0, 0, 0, 4 }, 
-				{ 0, 0, 0, 1, 0, 0, 0, 0, 9 } 
-			};
+		int[][] puzzle = { { 7, 1, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 5, 0, 0, 0, 9, 0, 0 }, { 0, 0, 3, 7, 2, 1, 0, 8, 0 },
+				{ 0, 0, 0, 5, 0, 8, 7, 0, 0 }, { 0, 5, 7, 4, 6, 0, 2, 0, 0 },
+				{ 9, 0, 1, 0, 7, 2, 4, 0, 0 }, { 0, 0, 0, 6, 4, 0, 8, 5, 0 },
+				{ 0, 0, 0, 0, 9, 0, 0, 0, 4 }, { 0, 0, 0, 1, 0, 0, 0, 0, 9 } };
 		puzzle = obj.backtrack(puzzle);
 
 		obj.printPuzzle(puzzle);

@@ -31,13 +31,7 @@ public class searchTest {
 		};
 	
 	search Search = new search();
-
-//	@Test
-//	public void test()
-//	{
-//		fail("Not yet implemented");
-//	}
-
+	
 	@Test
 	public void testValidRow()
 	{
