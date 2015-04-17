@@ -1,9 +1,9 @@
 package travis.sudokusolver;
 
-/**
-  * @author Travis Martin
-  * This was a project for CS4725 Intro to Artificial intelligence 
-  */
+/*
+ * @author Travis Martin
+ * This is not complete!
+ */
 import java.awt.*;
 import javax.swing.*;
 
