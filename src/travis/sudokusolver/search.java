@@ -12,58 +12,68 @@ public class search implements ISearch {
 		}
 	}
 
-	public int[][] backtrack(int[][] puzzle, int[][] emptySpot)
+	public int[][] getOpenSpots(int[][] puzzle)
 	{
-		int[][] numOpenSpots = emptySpot;
+		int totalNumOpen = 0;
+		int[][] numOpenSpots;
+		for (int i = 0; i < 9; i++)
+			for (int j = 0; j < 9; j++)
+				if (puzzle[i][j] == 0)
+					totalNumOpen++;
+
+		numOpenSpots = new int[totalNumOpen][2];
+		int count = 0;
+		for (int i = 0; i < 9; i++)
+			for (int j = 0; j < 9; j++)
+				if (puzzle[i][j] == 0)
+				{
+					numOpenSpots[count][0] = i;
+					numOpenSpots[count++][1] = j;
+				}
+
+		return numOpenSpots;
+	}
+
+	public int[][] backtrack(int[][] puzzle)
+	{
+		int[][] emptySpots = getOpenSpots(puzzle);
 		int k = 0;
 		boolean isFound = false;
 
-		while (!isFound)
+		for (int i = 0; i < emptySpots.length; i++)
 		{
-			int i = numOpenSpots[k][0];
-			int j = numOpenSpots[k][1];
+			int row = emptySpots[i][0];
+			int col = emptySpots[i][1];
 
-			if (puzzle[i][j] == 0)
+			if (puzzle[row][col] == 0)
 			{
-				puzzle[i][j] = 1;
+				puzzle[row][col] = 1;
 			}
-
-			// found solution
-			else if ((searchRules(i, j, puzzle)))
-			{
-				if (k + 1 == numOpenSpots.length)
-				{
-					isFound = true;
-				} else
-				{
-					k++;
-				}
-			}
-
-			else if (puzzle[i][j] < 9)
-			{
-				puzzle[i][j] = puzzle[i][j] + 1;
-			}
-
-			else
-			{
-				while (puzzle[i][j] == 9)
-				{
-					puzzle[i][j] = 0;
-					if (k == 0)
-					{
-						// PUZZLE CANT BE SOLVED!
-						return puzzle;
-					}
-					k--;
-					i = numOpenSpots[k][0];
-					j = numOpenSpots[k][1];
-				}
-				puzzle[i][j] = puzzle[i][j] + 1;
+			
+			if(searchRules(row, col, puzzle)){
+				System.out.println("TRUE we HIT DAT STUFF");
 			}
 		}
+
 		return puzzle;
 	}
+
+	/*
+	 * 
+	 * while (!isFound) { int i = numOpenSpots[k][0]; int j =
+	 * numOpenSpots[k][1];
+	 * 
+	 * if (puzzle[i][j] == 0) { puzzle[i][j] = 1; }
+	 * 
+	 * // found solution else if ((searchRules(i, j, puzzle))) { if (k + 1 ==
+	 * numOpenSpots.length) { isFound = true; } else { k++; } }
+	 * 
+	 * else if (puzzle[i][j] < 9) { puzzle[i][j] = puzzle[i][j] + 1; }
+	 * 
+	 * else { while (puzzle[i][j] == 9) { puzzle[i][j] = 0; if (k == 0) { //
+	 * PUZZLE CANT BE SOLVED! return puzzle; } k--; i = numOpenSpots[k][0]; j =
+	 * numOpenSpots[k][1]; } puzzle[i][j] = puzzle[i][j] + 1; } }
+	 */
 
 	public boolean searchRules(int i, int j, int[][] puzzle)
 	{

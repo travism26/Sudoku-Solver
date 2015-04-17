@@ -29,6 +29,19 @@ public class searchTest {
 			{ 0, 0, 0, 0, 9, 0, 0, 0, 4 },
 			{ 0, 0, 0, 1, 0, 0, 0, 0, 9 }
 		};
+	
+	int[][] solPuzzle =
+		{
+			{7,1,8,9,5,6,3,4,2},
+			{2,6,5,8,3,4,9,7,1},
+			{4,9,3,7,2,1,5,8,6},
+			{6,4,2,5,1,8,7,9,3},
+			{3,5,7,4,6,9,2,1,8},
+			{9,8,1,3,7,2,4,6,5},
+			{1,2,9,6,4,3,8,5,7},
+			{8,7,6,2,9,5,1,3,4},
+			{5,3,4,1,8,7,6,2,9}
+		};
 	search Search = new search();
 
 //	@Test
@@ -52,7 +65,7 @@ public class searchTest {
 	@Test
 	public void testValidCol(){
 		
-		int[][] pos = { { 1, 0 },{2, 0 }, { 3, 0 }, { 4, 0}, {6, 0}, {7, 0} };
+		int[][] pos = { { 1, 0 }, {2, 0 }, { 3, 0 }, { 4, 0}, {6, 0}, {7, 0} };
 		int[] testable = {2, 4, 6, 3, 1, 8};
 		for (int i = 0; i < pos.length; i++)
 		{
@@ -78,21 +91,13 @@ public class searchTest {
 	
 	@Test
 	public void testSearchRules(){
-		/* TEST DESCRIPTION */
-		//we need to get the num empty pos and loop through em :)
-		//checking if the rules are passing true.
-		//I will use an online sudoku solver to get the ans to few spots
-		//and use them as test points.
 
-		int[][] pos = { { 1, 0 }, { 2, 1 }, { 0, 2 }, {0, 3}, { 1, 4 } };
-		int[] testable = {2, 9, 8, 9, 3};
-		for (int i = 0; i < pos.length; i++)
+		int[][] missingNumbersPosition = Search.getOpenSpots(puzzle);
+		for (int i = 0; i < missingNumbersPosition.length; i++)
 		{
-			int row = pos[i][0];
-			int col = pos[i][1];
-			puzzle[row][col] = testable[i];
-			assertEquals("should return true", true, Search.boxCheck(pos[i], puzzle));
+			int row = missingNumbersPosition[i][0];
+			int col = missingNumbersPosition[i][1];
+			assertEquals("should return true", true, Search.searchRules(row, col, solPuzzle));
 		}
 	}
-
 }

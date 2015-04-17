@@ -28,28 +28,10 @@ public class Sudoku {
 	public static void println(Object input){
 		System.out.println(input.toString());
 	}
-	public int[][] getopenspot(int[][] puzzle)
-	{
-		int totalNumOpen = 0;
-		int[][] numOpenSpots;
-		for (int i = 0; i < 9; i++)
-			for (int j = 0; j < 9; j++)
-				if (puzzle[i][j] == 0)
-					totalNumOpen++;
-
-		numOpenSpots = new int[totalNumOpen][2];
-		int count = 0;
-		for (int i = 0; i < 9; i++)
-			for (int j = 0; j < 9; j++)
-				if (puzzle[i][j] == 0)
-				{
-					numOpenSpots[count][0] = i;
-					numOpenSpots[count++][1] = j;
-				}
-
-		return numOpenSpots;
-	}
 	
+	public search getSearch(){
+		return this.solver;
+	}
 	
 
 	public static void main(String[] args) throws IOException
@@ -67,7 +49,7 @@ public class Sudoku {
 				{ 0, 8, 1, 4, 5, 0, 0, 0, 9 },
 				{ 0, 3, 4, 0, 8, 0, 5, 7, 0 }
 			};
-		int[][] emptyLocals = obj.getopenspot(puzzle);
+		int[][] emptyLocals = obj.getSearch().getOpenSpots(puzzle);
 		println(emptyLocals.length);
 		for (int i = 0; i < 4; i++)
 		{
