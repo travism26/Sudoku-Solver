@@ -7,16 +7,6 @@ import org.junit.Test;
 
 public class searchTest {
 	
-	/*
-	 * NOTES:
-	 * valid numbers for the first position are: {3, 5}
-	 * Invalid Nums for the fisrt pos are: { 1, 2, 4, 6, 7, 8, 9}
-	 * 
-	 * Create test cases on the below data
-	 * Valid pos for top row are: {1, 3, 5, 7}
-	 * Valid pos for first col are: {2, 3, 4, 5, 6, 9}
-	 * Valid pos for first box are: {3, 4, 5, 6, 9}
-	 */
 	int[][] puzzle = 
 		{ 
 			{ 7, 1, 0, 0, 0, 0, 0, 0, 0 },
