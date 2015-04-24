@@ -2,10 +2,10 @@
 
 ## Getting Started
 
-1) Clone this repository
-2) Create a Sudoku object `Sudoku obj = new Sudoku(new solvable());`
-3) input your puzzle NOTE: 0 represents empty space in puzzle.
-4) call the solvePuzzle(int[][] puz) method.
+1. Clone this repository
+2. Create a Sudoku object `Sudoku obj = new Sudoku(new solvable());`
+3. input your puzzle NOTE: 0 represents empty space in puzzle.
+4. call the solvePuzzle(int[][] puz) method.
 
 #### Example
 ```
