@@ -24,6 +24,5 @@ Sudoku obj = new Sudoku(new solvable());
 		};
 	puzzle = obj.solvePuzzle(puzzle);
 	
-	obj.getSearch().printPuzzle(puzzle);
+	obj.printPuzzle(puzzle);
 ```
-

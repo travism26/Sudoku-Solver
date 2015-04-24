@@ -58,6 +58,6 @@ public class Sudoku {
 			};
 		puzzle = obj.solvePuzzle(puzzle);
 		
-		obj.getSearch().printPuzzle(puzzle);
+		obj.printPuzzle(puzzle);
 	}
 }
