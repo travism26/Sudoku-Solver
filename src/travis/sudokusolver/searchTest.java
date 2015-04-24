@@ -1,22 +1,11 @@
 package travis.sudokusolver;
 
-import travis.sudokusolver.search;
+import travis.sudokusolver.solvable;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
 public class searchTest {
-	
-	/*
-	 * NOTES:
-	 * valid numbers for the first position are: {3, 5}
-	 * Invalid Nums for the fisrt pos are: { 1, 2, 4, 6, 7, 8, 9}
-	 * 
-	 * Create test cases on the below data
-	 * Valid pos for top row are: {1, 3, 5, 7}
-	 * Valid pos for first col are: {2, 3, 4, 5, 6, 9}
-	 * Valid pos for first box are: {3, 4, 5, 6, 9}
-	 */
 	int[][] puzzle = 
 		{ 
 			{ 7, 1, 0, 0, 0, 0, 0, 0, 0 },
@@ -30,7 +19,7 @@ public class searchTest {
 			{ 0, 0, 0, 1, 0, 0, 0, 0, 9 }
 		};
 	
-	search Search = new search();
+	solvable Search = new solvable();
 	
 	@Test
 	public void testValidRow()
@@ -75,7 +64,7 @@ public class searchTest {
 	public void testSearchRules(){
 
 		int[][] missingNumbersPosition = Search.getOpenSpots(puzzle);
-		int[][] solution = Search.backtrack(puzzle);
+		int[][] solution = Search.search(puzzle);
 		for (int i = 0; i < missingNumbersPosition.length; i++)
 		{
 			int row = missingNumbersPosition[i][0];

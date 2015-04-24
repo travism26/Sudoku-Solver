@@ -1,7 +1,5 @@
 package travis.sudokusolver;
 
-import java.io.*;
-
 
 /*
  * @author Travis Martin
@@ -14,13 +12,13 @@ import java.io.*;
 
 public class Sudoku {
 
-	protected search solver;
+	protected ISearch solver;
 	protected int[][] puzzle;
 
 	// might now be needed.
 	protected int[][] emptyGrids;
 
-	public Sudoku(search solver)
+	public Sudoku(ISearch solver)
 	{
 		this.solver = solver;
 	}
@@ -29,14 +27,23 @@ public class Sudoku {
 		System.out.println(input.toString());
 	}
 	
-	public search getSearch(){
+	public ISearch getSearch(){
 		return this.solver;
 	}
 	
+	public int[][] solvePuzzle(int[][] puzzle){
+		int[][] solution = getSearch().search(puzzle);
+		return solution;
+	}
+	
+	public void printPuzzle(int[][] puzzle){
+		getSearch().printPuzzle(puzzle);
+	}
+	
 
-	public static void main(String[] args) throws IOException
+	public static void main(String[] args)
 	{
-		Sudoku obj = new Sudoku(new search());
+		Sudoku obj = new Sudoku(new solvable());
 		int[][] puzzle = 
 			{ 
 				{ 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -49,7 +56,7 @@ public class Sudoku {
 				{ 0, 8, 1, 4, 5, 0, 0, 0, 9 },
 				{ 0, 3, 4, 0, 8, 0, 5, 7, 0 }
 			};
-		puzzle = obj.getSearch().backtrack(puzzle);
+		puzzle = obj.solvePuzzle(puzzle);
 		
 		obj.getSearch().printPuzzle(puzzle);
 	}

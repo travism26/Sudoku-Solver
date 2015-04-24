@@ -1,6 +1,6 @@
 package travis.sudokusolver;
 
-public class search implements ISearch {
+public class solvable implements ISearch {
 
 	public void printPuzzle(int[][] puzzle)
 	{
@@ -35,7 +35,7 @@ public class search implements ISearch {
 		return numOpenSpots;
 	}
 
-	public int[][] backtrack(int[][] puzzle)
+	public int[][] search(int[][] puzzle)
 	{
 		boolean isDone = false;
 		int i = 0;
@@ -146,38 +146,14 @@ public class search implements ISearch {
 		int j = pos[1];
 		for (int r = (i / 3) * 3; r < (i / 3) * 3 + 3; r++)
 		{
-			// System.out.println();
 			for (int col = (j / 3) * 3; col < (j / 3) * 3 + 3; col++)
 			{
-				// System.out.println("R value: " + r);
-				// System.out.println("I value: " + i);
-				// System.out.println("col value: " + col);
-				// System.out.println("J value: " + j);
-				// System.out.println("puzzle[r][col] value: " +
-				// puzzle[r][col]);
-				// System.out.println("puzzle[i][j] value: " + puzzle[i][j]);
-				// R and col are already tested remove unnecessary tests cases.
 				if (r != i && col != j && puzzle[r][col] == puzzle[i][j])
 				{
-					// System.out.println("value: FALSE");
 					return false;
 				}
 			}
 		}
-		// System.out.println("value: TRUE");
 		return true;
-	}
-
-	public static void main(String[] args)
-	{
-		search obj = new search();
-		int[][] puzzle = { { 7, 1, 0, 0, 0, 0, 0, 0, 0 },
-				{ 0, 0, 5, 0, 0, 0, 9, 0, 0 }, { 0, 0, 3, 7, 2, 1, 0, 8, 0 },
-				{ 0, 0, 0, 5, 0, 8, 7, 0, 0 }, { 0, 5, 7, 4, 6, 0, 2, 0, 0 },
-				{ 9, 0, 1, 0, 7, 2, 4, 0, 0 }, { 0, 0, 0, 6, 4, 0, 8, 5, 0 },
-				{ 0, 0, 0, 0, 9, 0, 0, 0, 4 }, { 0, 0, 0, 1, 0, 0, 0, 0, 9 } };
-		puzzle = obj.backtrack(puzzle);
-
-		obj.printPuzzle(puzzle);
 	}
 }

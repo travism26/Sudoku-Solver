@@ -1,4 +1,5 @@
 package travis.sudokusolver;
 public interface ISearch {
-	int[][] backtrack(int[][] puzzle);
+	int[][] search(int[][] puzzle);
+	void printPuzzle(int[][] puzzle);
 }
