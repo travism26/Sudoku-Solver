@@ -72,7 +72,7 @@ public class solvable implements ISearch {
 					puzzle[row][col] = 0;
 					if (i == 0)
 					{
-						//puzzle not solvable.
+						// puzzle not solvable.
 						return notSolvable();
 					}
 					i--;
@@ -85,7 +85,8 @@ public class solvable implements ISearch {
 		return puzzle;
 	}
 
-	public int[][] notSolvable(){
+	public int[][] notSolvable()
+	{
 		int[][] unSolvable = new int[9][9];
 		for (int i = 0; i < unSolvable.length; i++)
 		{
@@ -96,6 +97,7 @@ public class solvable implements ISearch {
 		}
 		return unSolvable;
 	}
+
 	public boolean searchRules(int i, int j, int[][] puzzle)
 	{
 		int[] pos = { i, j };
@@ -106,10 +108,8 @@ public class solvable implements ISearch {
 		if (row && col && box)
 		{
 			return true;
-		} else
-		{
-			return false;
 		}
+		return false;
 	}
 
 	public boolean rowCheck(int[] pos, int[][] puzzle)
